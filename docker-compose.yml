@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  # PostgreSQL для User Service
+  user-db:
+    container_name: user-db
+    image: postgres:12.7-alpine
+    environment:
+      POSTGRES_DB: users_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5431:5432"
+    networks:
+      - tracker-network
+
+  # User Service
+  user-service:
+    container_name: user-service
+    build:
+      context: ./user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - user-db
+    networks:
+      - tracker-network
+
+  # PostgreSQL для Board Service
+  board-db:
+    container_name: board-db
+    image: postgres:12.7-alpine
+    environment:
+      POSTGRES_DB: boards_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - tracker-network
+
+  # Board Service
+  board-service:
+    container_name: board-service
+    build:
+      context: ./board-service
+    ports:
+    - "8082:8082"
+    depends_on:
+      - board-db
+    networks:
+      - tracker-network
+
+
+  # PostgreSQL для Card Service
+  card-db:
+    container_name: card-db
+    image: postgres:12.7-alpine
+    environment:
+      POSTGRES_DB: cards_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - tracker-network
+
+  # Card Service
+  card-service:
+    container_name: card-service
+    build:
+      context: ./card-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - card-db
+    networks:
+      - tracker-network
+
+
+  # PostgreSQL для Task Service
+  task-db:
+    container_name: task-db
+    image: postgres:12.7-alpine
+    environment:
+      POSTGRES_DB: tasks_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    networks:
+      - tracker-network
+
+  # Task Service
+  task-service:
+    container_name: task-service
+    build:
+      context: ./task-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - task-db
+    networks:
+      - tracker-network
+
+networks:
+  tracker-network:
+    driver: bridge
