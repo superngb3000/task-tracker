@@ -6,4 +6,4 @@
 - [Сервис карточек](https://github.com/superngb3000/card-service)
 - [Сервис задач](https://github.com/superngb3000/task-service)
 
-Для запуска необходимо скачать файл "docker-compose.yml" выполнить команду docker-compose up
+Для запуска необходимо скачать файл [docker-compose.yml](/docker-compose.yml) выполнить команду ```docker-compose up``` в его директории.
