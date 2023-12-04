@@ -17,8 +17,7 @@ services:
   # User Service
   user-service:
     container_name: user-service
-    build:
-      context: ./user-service
+    image: superngb/task-tracker_user-service:1.0
     ports:
       - "8081:8081"
     depends_on:
@@ -42,8 +41,7 @@ services:
   # Board Service
   board-service:
     container_name: board-service
-    build:
-      context: ./board-service
+    image: superngb/task-tracker_board-service:1.0
     ports:
     - "8082:8082"
     depends_on:
@@ -68,8 +66,7 @@ services:
   # Card Service
   card-service:
     container_name: card-service
-    build:
-      context: ./card-service
+    image: superngb/task-tracker_card-service:1.0
     ports:
       - "8083:8083"
     depends_on:
@@ -94,8 +91,7 @@ services:
   # Task Service
   task-service:
     container_name: task-service
-    build:
-      context: ./task-service
+    image: superngb/task-tracker_task-service:1.0
     ports:
       - "8084:8084"
     depends_on:
